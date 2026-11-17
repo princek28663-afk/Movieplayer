@@ -442,3 +442,13 @@ process.on("SIGTERM", async () => {
   if (browser) await browser.close();
   process.exit();
 });
+browser = await chromium.launch({
+  executablePath: process.env.CHROMIUM_PATH, // सिस्टम Chromium का इस्तेमाल करेगा
+  headless: true,
+  args: [
+    '--no-sandbox',
+    '--disable-gpu',
+    '--single-process', // Termux पर क्रैश रोकने के लिए जरूरी है
+    '--disable-dev-shm-usage'
+  ]
+});
